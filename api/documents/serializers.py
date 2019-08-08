@@ -21,6 +21,7 @@ class DocumentCreateSerializer(ModelSerializer):
             doc.save()
         print(request.FILES.getlist("files"))
         for file in request.FILES.getlist('files'):
+            print(file)
             docfile = DocumentModelFile.objects.create(owner=doc, file=file)
             # docfile.file.save(file.name, open(file).read())
             docfile.save()
