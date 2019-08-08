@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p67fzpe5lt=+6pyo+k4j&q=+#a)pc+mhas@jf#9j+h^5l63n)1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -84,9 +84,9 @@ DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         # local
-        'NAME': 'document_flow',
-        'USER': 'postgres',
-        'PASSWORD': 'nightfire218'
+        'NAME': 'dflow',
+        'USER': 'dflow_user',
+        'PASSWORD': '12345'
     }
 }
 
