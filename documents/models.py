@@ -10,6 +10,7 @@ class DocumentModel(models.Model):
     modified = models.DateTimeField()
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     receiver = models.ManyToManyField('Receiver', related_name='receiver')
+    title = models.TextField(default='')
 
     def save(self, *args, **kwargs):
         if not self.id:
