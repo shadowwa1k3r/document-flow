@@ -88,7 +88,7 @@ DATABASES = {
         # local
         'NAME': 'document_flow',
         'USER': 'postgres',
-        'PASSWORD': 'nightfire218'
+        'PASSWORD': '12345'
     }
 }
 
