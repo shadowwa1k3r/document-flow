@@ -38,10 +38,10 @@ class UserCheckApiView(APIView):
 
     def get(self, request):
         name = request.GET.get('username')
-        if User.objects.filter(username=name).count() > 0:
-            return Response({"result": "not exist"})
-        else:
+        if User.objects.filter(username__iexact=name).count() > 0:
             return Response({"result": "exist"})
+        else:
+            return Response({"result": "not exist"})
     # def get(self, request):
     #     name = request.GET.get('q')
     #     print(request.GET)
