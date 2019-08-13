@@ -34,6 +34,7 @@ class UserUpdateSerializer(ModelSerializer):
         uname = request.data.get('username')
         lname = request.data.get('last_name')
         fname = request.data.get('first_name')
+        active = request.data.get('is_active')
         c_u = User.objects.get(id=instance.id)
         if passwd:
             print('updatedp', passwd)
@@ -49,4 +50,9 @@ class UserUpdateSerializer(ModelSerializer):
         if fname:
             c_u.first_name = fname
             c_u.save()
+        if active:
+            if active=='True':
+                c_u.is_active=True
+            else:
+                c_u.is_active = True
         return c_u

@@ -1,6 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
+from django.views.generic.base import View
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from api.users.serializers import UserListSerializer, UserCreateSerializer, UserUpdateSerializer
 from django.contrib.auth.models import User
 
@@ -24,4 +30,25 @@ class UserUpdateAPIView(UpdateAPIView):
     authentication_classes = (TokenAuthentication,)
     queryset = User.objects.filter()
     lookup_url_kwarg = 'id'
+
+
+class UserCheckApiView(APIView):
+    permission_classes = (IsAuthenticated, IsAdminUser)
+    authentication_classes = (TokenAuthentication,)
+
+    def get(self, request):
+        name = request.GET.get('username')
+        if User.objects.filter(username=name).count() > 0:
+            return Response({"result": "not exist"})
+        else:
+            return Response({"result": "exist"})
+    # def get(self, request):
+    #     name = request.GET.get('q')
+    #     print(request.GET)
+    #     if User.objects.filter(username=name).count()>0:
+    #         return JsonResponse({"result": "not exist"})
+    #     else:
+    #         return JsonResponse({"result": "exist"})
+
+
 
