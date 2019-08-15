@@ -24,7 +24,7 @@ class DocumentSentListAPIView(ListAPIView):
 
     def get_queryset(self):
         queryset = DocumentModel.objects.filter(sender=self.request.user).filter(~Q(deleted=self.request.user))
-
+        print(self.request.GET)
         m_id = self.request.GET.get('message_id')
         if m_id:
             m = DocumentModel.objects.get(id=m_id)
@@ -46,6 +46,7 @@ class DocumentReceivedListAPIView(ListAPIView):
     def get_queryset(self):
         print(DocumentModel.objects.filter(receiver__user=self.request.user).count())
         queryset = DocumentModel.objects.filter(receiver__user=self.request.user).filter(~Q(deleted=self.request.user))
+        print(self.request.GET)
         m_id = self.request.GET.get('message_id')
         if m_id:
             m = DocumentModel.objects.get(id=m_id)
