@@ -12,6 +12,7 @@ class DocumentModel(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     receiver = models.ManyToManyField('Receiver', related_name='receiver')
     title = models.TextField(default='')
+    text = models.TextField(default='')
     deleted = models.ManyToManyField(User, related_name='deleted_users')
 
     def save(self, *args, **kwargs):
