@@ -56,7 +56,7 @@ class DocumentSentSerializer(ModelSerializer):
 
     class Meta:
         model = DocumentModel
-        fields = ('sender', 'created', 'modified', 'files', 'receiver', 'title')
+        fields = ('id', 'sender', 'created', 'modified', 'files', 'receiver', 'title')
 
 
 class DocumentListSerializer(ModelSerializer):
@@ -65,4 +65,4 @@ class DocumentListSerializer(ModelSerializer):
 
     class Meta:
         model = DocumentModel
-        fields = ('sender', 'created', 'modified', 'files', 'title')
+        fields = ('id', 'sender', 'created', 'modified', 'files', 'title')
