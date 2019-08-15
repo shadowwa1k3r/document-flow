@@ -42,6 +42,8 @@ class DocumentReceivedListAPIView(ListAPIView):
         return queryset
 
 class DocumentDeleteAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
     def post(self, request):
         d_id = request.POST.get('message_id')
         d = DocumentModel.objects.get(id=d_id)
