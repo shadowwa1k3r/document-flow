@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 class DocumentModel(models.Model):
     created = models.DateTimeField(editable=False)
+    read = models.BooleanField(default=False)
     modified = models.DateTimeField()
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     receiver = models.ManyToManyField('Receiver', related_name='receiver')

@@ -24,6 +24,10 @@ class DocumentSentListAPIView(ListAPIView):
 
     def get_queryset(self):
         queryset = DocumentModel.objects.filter(sender=self.request.user).filter(~Q(deleted=self.request.user))
+
+        m_id = self.request.GET.get('message_id')
+        if m_id:
+            queryset = queryset.filter(id=m_id)
         # u_id = self.request.GET.get('u_id')
         # if u_id:
             # queryset = queryset.filter(sender=u_id)
@@ -39,6 +43,9 @@ class DocumentReceivedListAPIView(ListAPIView):
     def get_queryset(self):
         print(DocumentModel.objects.filter(receiver__user=self.request.user).count())
         queryset = DocumentModel.objects.filter(receiver__user=self.request.user).filter(~Q(deleted=self.request.user))
+        m_id = self.request.GET.get('message_id')
+        if m_id:
+            queryset = queryset.filter(id=m_id)
         # u_id = self.request.GET.get('u_id')
         # if u_id:
             # queryset = queryset.filter(sender=u_id)
@@ -48,7 +55,8 @@ class DocumentDeleteAPIView(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
     def post(self, request):
-        d_id = request.POST.get('message_id')
+        print(request.data)
+        d_id = request.data.get('message_id')
         d = DocumentModel.objects.get(id=d_id)
         d.deleted.add(request.user)
         d.save()
