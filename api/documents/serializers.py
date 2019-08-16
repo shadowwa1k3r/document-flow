@@ -13,6 +13,7 @@ class DocumentCreateSerializer(ModelSerializer):
         request = self.context['request']
         doc = DocumentModel(sender=request.user)
         doc.title = request.data['title']
+        doc.text = request.data['text']
         doc.save()
         for rv in request.data.getlist('receivers'):
             # rec = Receiver.objects.get(user=User.objects.get(id=rv))
